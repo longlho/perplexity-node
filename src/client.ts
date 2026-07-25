@@ -17,6 +17,7 @@ import * as Errors from './core/error';
 import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
+import { PerplexitySdk } from './generated/api';
 import {
   ContextualizedEmbeddingCreateParams,
   ContextualizedEmbeddingCreateResponse,
@@ -213,6 +214,15 @@ export class Perplexity {
     this._options = options;
 
     this.apiKey = apiKey;
+
+    const sdk = new PerplexitySdk(this);
+    this.async = sdk.async;
+    this.browser = sdk.browser;
+    this.chat = sdk.chat;
+    this.contextualizedEmbeddings = sdk.contextualizedEmbeddings;
+    this.embeddings = sdk.embeddings;
+    this.responses = sdk.responses;
+    this.search = sdk.search;
   }
 
   /**
@@ -770,13 +780,13 @@ export class Perplexity {
 
   static toFile = Uploads.toFile;
 
-  chat: API.Chat = new API.Chat(this);
-  search: API.Search = new API.Search(this);
-  responses: API.Responses = new API.Responses(this);
-  embeddings: API.Embeddings = new API.Embeddings(this);
-  contextualizedEmbeddings: API.ContextualizedEmbeddings = new API.ContextualizedEmbeddings(this);
-  browser: API.Browser = new API.Browser(this);
-  async: API.Async = new API.Async(this);
+  chat: PerplexitySdk['chat'];
+  search: PerplexitySdk['search'];
+  responses: PerplexitySdk['responses'];
+  embeddings: PerplexitySdk['embeddings'];
+  contextualizedEmbeddings: PerplexitySdk['contextualizedEmbeddings'];
+  browser: PerplexitySdk['browser'];
+  async: PerplexitySdk['async'];
 }
 
 Perplexity.Chat = Chat;
