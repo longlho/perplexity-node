@@ -15,3 +15,4 @@ node examples/browser-session.ts
 ```
 
 Each file is standalone and follows API shapes documented in [api.md](../api.md).
+Examples call live APIs and may incur usage.
